@@ -1,0 +1,53 @@
+!!!
+%html
+  %head
+    %title Ciber Squash
+    = haml :"templates/header_imports"
+    %link(rel="stylesheet" href="/css/pikaday.css")
+  %body
+    = haml :"templates/nav"
+  
+    .pure-g
+      .pure-u-1.pure-u-md-1-3.l-box
+        %form.pure-form.pure-form-aligned{:action => "/admin/edit/#{event['id']}", :method => "POST"}
+          %fieldset
+            %legend Rediger event
+
+            .pure-control-group
+              %label{:for => "date"} Dato
+              %input#date{:name => "date", :placeholder => "05.11.2014", :type => "text", :value => event["date"].strftime('%d.%m.%Y')}
+
+            .pure-control-group
+              %label{:for => "max"} Max
+              %input#max{:name => "max", :placeholder => "7", :type => "number", :value => event["max"]}
+
+            .pure-control-group
+              %button.pure-button.pure-button-primary{:type => "submit"} Lagre
+
+      .pure-u-1.pure-u-md-1-3.l-box
+        %ol
+          - event["participating"].each do | p |
+            %li
+              - if p["email"]
+                - md5 = Digest::MD5.hexdigest(p["email"].strip.downcase)
+                %img{:src => "http://www.gravatar.com/avatar/#{md5}", :alt => "Profile of #{p['name']}"}
+              = p["name"]
+              %a{:href => "/admin/edit/#{event['id']}/remove/#{p['id']}"}
+                Fjern
+
+%script{:src => "/js/moment-with-locales.js"}
+%script{:src => "/js/pikaday.js"}
+:javascript
+  var picker = new Pikaday({
+      field: document.getElementById('date'),
+      format: 'DD.MM.YYYY',
+      firstDay: 1,
+      showWeekNumber: true,
+      i18n: {
+          previousMonth : 'Forrige m&aring;ned',
+          nextMonth     : 'Neste m&aring;ned',
+          months        : ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'],
+          weekdays      : ['S&oslash;ndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','L&oslash;rdag'],
+          weekdaysShort : ['S&oslash;n','Man','Tir','Ons','Tor','Fre','L&oslash;r']
+        },
+    });

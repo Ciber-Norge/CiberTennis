@@ -1,0 +1,16 @@
+!!!
+%html
+  %head
+    %title Ciber Squash
+    = haml :"templates/header_imports"
+  %body
+    = haml :"templates/nav"
+
+    .pure-g
+      .pure-u-1.pure-u-md-1-3.l-box
+        %fieldset
+          %legend Registrere resultater
+          - get_events.each do | key, value |
+            %p
+              Event: #{value["date"].strftime('%d.%m.%Y')} - 
+              %a{:href => "/resultater/" + key} Legg til resultater

@@ -1,0 +1,41 @@
+body {
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pure-g > div {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.l-box {
+  margin: 1em;
+  padding: 1em;
+  border: .1em #000 solid;
+}
+.button-success {
+  background: rgb(28, 184, 65);
+}
+.button-secondary {
+  background: rgb(66, 184, 221);
+}
+.button-error {
+  background: rgb(202, 60, 60);
+}
+.pure-form-aligned .pure-control-group label {
+  text-align: left;
+  width: auto;
+}
+ul li a {
+  text-decoration: none;
+}
+@media only screen and (max-width: 1026px) { 
+  .map { 
+    display: none; 
+  } 
+}
+#map-canvas {
+  width: auto;
+  height: 400px;
+  background-color: #CCC;
+}

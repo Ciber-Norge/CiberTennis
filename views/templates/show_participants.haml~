@@ -1,0 +1,8 @@
+- participants.each do | p |
+       - if p["image"]
+         %img{:src => p["image"], :alt => "Profile of #{p['name']}", :title => "Profile of #{p['name']}"}
+       - elsif p["email"]
+         - md5 = Digest::MD5.hexdigest(p["email"].strip.downcase)
+         %img{:src => "http://www.gravatar.com/avatar/#{md5}", :alt => "Profile of #{p['name']}", :title => "Profile of #{p['name']}"}
+     <br><br>
+     PS: Vises det et bilde av en 'G' så betyr det at du ikke har bilde på din Facebook eller Google+ profil. Istendenfor kan du legge til et bilde på <a href="https://gravatar.com">Gravatar.com</a>. Ta kontakt med <a href="mailto:kyrre.eriksen@ciber.com">Kyrre</a> for hjelp.

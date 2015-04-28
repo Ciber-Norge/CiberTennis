@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title Ciber Squash
+    = haml :"templates/header_imports"
+  %body
+    = haml :"templates/nav"
+    
+    %img{:src => "/images/it-crowd-meme.jpeg", :alt => "Have you tried turning it off, and on again?", :title => "Have you tried turning it off, and on again?"}
+    
+    %p
+      Guess you broke it! Try to log off and on again. Seriously
+      = succeed "!" do
+        %a{:href => "/logout"} log out
+      It will probably fix the problem.

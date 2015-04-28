@@ -1,0 +1,23 @@
+.pure-menu.pure-menu-open.pure-menu-horizontal
+  %a.pure-menu-heading{:href => "/"}
+    Ciber Squash
+  %ul
+    %li.pure-menu
+      %a{:href => '/'} Home
+    - if is_logged_in?
+      %li.pure-menu
+        %a{:href => '/resultater'} Resultater
+      %li.pure-menu
+        %a{:href => '/minside'} Min side
+      %li.pure-menu
+        %a{:href => '/logout'} Logg ut
+    - unless is_logged_in?
+      %li.pure-menu
+        %a{:href => '/auth/google_oauth2'} Sign in with Google
+      %li.pure-menu
+        %a{:href => '/auth/facebook'} Sign in with Facebook
+    - if is_admin?
+      %li.pure-menu
+        %a{:href => "/admin"} Admin
+    %li.pure-menu
+      %a{:href => "/credit"} Credit

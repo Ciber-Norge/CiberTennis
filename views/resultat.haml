@@ -1,0 +1,94 @@
+!!!
+%html
+  %head
+    %title Ciber Squash
+    = haml :"templates/header_imports"
+  %body
+    = haml :"templates/nav"
+
+    .pure-g
+      .pure-u-1.pure-u-md-1-3.l-box
+        %form.pure-form.pure-form-aligned{:action => "/resultater/" + event["id"], :method => "POST"}
+          %fieldset
+            %legend Legg til resultat
+
+            .pure-control-group
+              %label{:for => "player1"} Spiller 1
+              %select{:name => "player1"}
+                %option{:value => "none"}
+                - event["participating"].each do | value |
+                  %option{:value => value["id"]}
+                    = value["name"]
+
+            .pure-control-group
+              %label{:for => "player2"} Spiller 2
+              %select{:name => "player2"}
+                %option{:value => "none"}
+                - event["participating"].each do | value |
+                  %option{:value => value["id"]}
+                    = value["name"]
+
+            .pure-control-group
+              %label.pure-radio{:for => "simple", :onclick => "simpleScoring()"}
+                %input#simple{:checked => "", :name => "registration_type", :type => "radio", :value => "simple"}
+                  Enkel registrering
+
+            %div#simple-div{:style => "display: none;"}
+              Hvem vant?
+              .pure-control-group
+                %label{:for => "winner1"} Spiller 1
+                %input#winner1{:name => "winner", :type => "radio", :value => "winner1"}
+  
+              .pure-control-group
+                %label{:for => "winner2"} Spiller 2
+                %input#winner2{:name => "winner", :type => "radio", :value => "winner2"}
+
+            .pure-control-group
+              %label.pure-radio{:for => "advance", :onclick => "advanceScoring()"}
+                %input#advance{:checked => "true", :name => "registration_type", :type => "radio", :value => "advanced"}
+                  Avansert registrering
+
+            %div#advance-div
+              .pure-control-group
+                %label{:for => "score1"} Poeng 1
+                %input#score1{:name => "score1", :placeholder => "7", :type => "number"}
+  
+              .pure-control-group
+                %label{:for => "score2"} Poeng 2
+                %input#score2{:name => "score2", :placeholder => "11", :type => "number"}
+
+            .pure-control-group
+              %button.pure-button.pure-button-primary{:type => "submit"} Legg til
+
+      .pure-u-1.pure-u-md-1-3.l-box
+        - event["scores"].each do | value |
+          - p1 = users[value["player1"]]["first_name"]
+          - s1 = value["score1"]
+          - p2 = users[value["player2"]]["first_name"]
+          - s2 = value["score2"]
+          - isSimple = value.has_key?("winner")
+          - if isSimple
+            - if value["winner"].match("winner1")
+              #{p1} vant over #{p2} 
+            - else
+              #{p2} vant over #{p1} 
+          - else
+            #{p1} #{s1} - #{s2} #{p2}
+          - if is_admin?
+            %a{:href => "/resultater/" + event["id"] + "/remove/" + value["id"]}
+              Slett
+          %br
+
+      .pure-u-1.pure-u-md-1-3.l-box
+        = haml :"templates/show_participants", :locals => {:participants => event["participating"]}
+
+    :javascript
+      function simpleScoring() {
+        document.getElementById('simple-div').style.display = '';
+        document.getElementById('advance-div').style.display = 'none';
+      }
+    
+      function advanceScoring() {
+        document.getElementById('advance-div').style.display = '';
+        document.getElementById('simple-div').style.display = 'none';
+      }
