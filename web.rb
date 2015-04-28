@@ -34,10 +34,10 @@ unless FACEBOOK_SECRET = ENV['FACEBOOK_SECRET']
   raise "You must specify the FACEBOOK_SECRET env variable"
 end
 
-$DB_URL = ENV['CLOUDANT_URL'] + '/squash'
-$eventsId = '81a97d7a3192b7ea47b6f3acc37da3bd'
-$usersId = '26566edcbb3782c35347e1cea5608f2a'
-$userInfoId = '206043c3f243b4fed7c70df98b295e09'
+$DB_URL = ENV['CLOUDANT_URL'] + '/tennis'
+$eventsId = 'e880ba39b93d28125e641cbfb6678ff1'
+$usersId = '9157ee4977df70f38f6373aab9f049e4'
+$userInfoId = '9157ee4977df70f38f6373aab9eca46b'
 
 use Rack::Session::Cookie, :secret => ENV['RACK_COOKIE_SECRET']
 
