@@ -34,7 +34,7 @@ unless FACEBOOK_SECRET = ENV['FACEBOOK_SECRET']
   raise "You must specify the FACEBOOK_SECRET env variable"
 end
 
-$DB_URL = ENV['CLOUDANT_URL'] + '/tennis'
+$DB_URL = CLOUDANT_URL + '/tennis'
 $eventsId = 'e880ba39b93d28125e641cbfb6678ff1'
 $usersId = '9157ee4977df70f38f6373aab9f049e4'
 $userInfoId = '9157ee4977df70f38f6373aab9eca46b'
