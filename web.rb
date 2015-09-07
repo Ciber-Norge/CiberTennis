@@ -131,7 +131,7 @@ get '/admin' do
   haml :admin
 end
 
-get '/admin/event/add/:date' do
+get '/admin/event/add' do
   date = params[:date]
   if correct_date? date then
     add_event! date
